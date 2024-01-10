@@ -16,7 +16,8 @@ jobs:
 
         - name: Extract Tag
           id: extract_tag
-          run: echo ::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)
+#          run: echo ::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)
+          run: echo "{tag}=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_LATEST_TAG
 
         - name: Show Tag
-          run: echo ${{ steps.extract_tag.outputs.tag }}
+          run: echo ${{ GITHUB_LATEST_TAG }}
