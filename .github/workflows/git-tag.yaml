@@ -10,6 +10,8 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
+        env:
+          Docker_Tag: "latest"
         steps:
         - name: Checkout
           uses: actions/checkout@v2
@@ -18,7 +20,7 @@ jobs:
           id: extract_tag
 #          run: echo ::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)
 #          run: echo "tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $LATEST_TAG
-          run: echo "tag=value" >> $LATEST_TAG
+          run: echo "tag=value" >> $Docker_Tag
 
         - name: Show Tag
           run: echo $LATEST_TAG
