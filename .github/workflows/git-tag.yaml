@@ -23,4 +23,4 @@ jobs:
           run: echo "tag=value" >> $Docker_Tag
 
         - name: Show Tag
-          run: echo $LATEST_TAG
+          run: echo $Docker_Tag
