@@ -12,14 +12,31 @@ jobs:
         runs-on: ubuntu-latest
         env:
           Latest_Tag: "latest"
+          Image_Name: "actions-demo:latest"
         steps:
-        - name: Checkout
-          uses: actions/checkout@v2
+          - name: Checkout
+            uses: actions/checkout@v2
 
-        - name: Extract Tag
-          id: extract_tag
+          - name: Extract Tag
+            id: extract_tag
 #          run: echo ::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)
-          run: echo "tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $Latest_Tag
+            run: echo "tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $Latest_Tag
 
-        - name: Show Tag
-          run: echo $Latest_Tag
+          - name: Show Tag
+            run: echo $Latest_Tag
+
+          - name: Show Ref Name
+            run: echo $GITHUB_REF_NAME
+
+          - name: Set Image Name
+            run: echo "image_name=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9]//g'):$(echo $GITHUB_REF_NAME | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9]//g')" >> $Image_Name
+
+          - name: Show Image Name
+            run: |
+              echo $Image_Name
+              echo ${{env.Image_Name}}
+
+          - name: Re Set Image Name
+            env:
+              New_Image_Name: ${{env.Image_Name}}
+            run: echo $New_Image_Name
