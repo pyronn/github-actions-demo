@@ -20,20 +20,20 @@ jobs:
           - name: Extract Tag
             id: extract_tag
 #          run: echo ::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)
-            run: echo "latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $Latest_Tag
+            run: echo "latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
 
           - name: Show Tag
-            run: echo $Latest_Tag
+            run: echo $latest_tag
 
           - name: Show Ref Name
             run: echo $GITHUB_REF_NAME
 
           - name: Set Image Name
-            run: echo "image_name=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9]//g'):$(echo $GITHUB_REF_NAME | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9]//g')" >> $Image_Name
+            run: echo "image_name=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9]//g'):$(echo $GITHUB_REF_NAME | tr '[:upper:]' '[:lower:]' | sed 's/[^a-zA-Z0-9]//g')" >> $GITHUB_ENV
 
           - name: Show Image Name
             run: |
-              echo $Image_Name
+              echo $image_name
               echo ${{env.Image_Name}}
 
           - name: Re Set Image Name
