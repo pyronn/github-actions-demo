@@ -20,7 +20,7 @@ jobs:
           - name: Extract Tag
             id: extract_tag
 #          run: echo ::set-output name=tag::$(git describe --tags `git rev-list --tags --max-count=1`)
-            run: echo "tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $Latest_Tag
+            run: echo "latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $Latest_Tag
 
           - name: Show Tag
             run: echo $Latest_Tag
